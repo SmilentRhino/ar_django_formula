@@ -1,0 +1,18 @@
+consul:
+  version: 0.7.0
+  download_host: releases.hashicorp.com
+
+  service: false
+  config:
+    server: false
+    bind_addr: 0.0.0.0
+    data_dir: /var/consul
+    ui: true
+    enable_debug: false
+    log_level: info
+    encrypt: ""
+    retry_join: []
+    retry_interval: 30s
+    datacenter: "main"
+  register: []
+  scripts: []
