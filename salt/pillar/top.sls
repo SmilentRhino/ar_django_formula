@@ -1,7 +1,8 @@
 base:
   "*":
     - users
-  "dev":
+  "dev*":
     - consul.dev
+    - apache
   "jenkins*":
     - consul.jenkins

@@ -1,0 +1,30 @@
+{% set project_domain_name = pillar.get('project_domain_name', 'django_project') %}
+{% set project_name = pillar.get('project_name', 'django_project')  %}
+{% set project_user = pillar.get('project_user', 'alexrhino')  %}
+{% set app_name = pillar.get('app_name', 'test')  %}
+
+<VirtualHost *:80>
+    DocumentRoot "/var/www/{{ project_name }}"
+    ServerName {{ project_domain_name }}
+    WSGIScriptAlias / /var/www/{{ project_name }}/{{ app_name }}/wsgi.py
+    WSGIPythonHome /home/{{ project_user }}/venvs/{{ project_name }}
+    WSGIPythonPath /var/www/{{ project_name }}
+    WSGIProcessGroup %{GLOBAL}
+    WSGIApplicationGroup %{GLOBAL}
+    
+    Alias /static/ /var/www/{{ project_name }}/static/
+    
+    <Directory /var/www/{{ project_name }}/static>
+    Require all granted
+    </Directory>
+    
+    
+    
+    <Directory /var/www/{{ project_name }}/>
+        AuthType Basic
+        AuthName "Top Secret"
+        Require valid-user
+        AuthBasicProvider wsgi
+        WSGIAuthUserScript /var/www/{{ project_name }}/{{ app_name }}/wsgi.py
+    </Directory>
+</VirtualHost>

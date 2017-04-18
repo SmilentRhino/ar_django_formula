@@ -1,0 +1,7 @@
+#A salt formula to setup a minimal ci for django project
+A project just for fun, [https://github.com/SmilentRhino/django_key_manager](https://github.com/SmilentRhino/django_key_manager)
+
+This project make use of following officical formulas
+
+* users_formula
+* apache_formula 

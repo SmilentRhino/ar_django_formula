@@ -21,6 +21,6 @@ virtualenv:
     - user: {{ project_user }}
     - python: /usr/bin/python3
     - system_site_packages: False
-    - requirements: salt://{{ project_name }}/{{ project_name }}_requirements.txt
+    - requirements: salt://{{ project_name }}/files/{{ project_name }}_requirements.txt
     - require:
       - user: {{ project_user }}
