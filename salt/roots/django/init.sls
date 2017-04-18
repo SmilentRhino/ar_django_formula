@@ -7,17 +7,19 @@ python.packages:
       - python3
       - python3-dev
       - python3-pip
+      - python-pip
 
 virtualenv:
   pip.installed:
     - name: virtualenv
     - bin_env: /usr/bin/pip3
     - require:
-      - pkg: python3-pip
+      - pkg: python.packages
 
-/usr/local/venvs/{{ project_name }}:
+/home/{{ project_user }}/venvs/{{ project_name }}:
   virtualenv.managed:
     - user: {{ project_user }}
+    - python: /usr/bin/python3
     - system_site_packages: False
     - requirements: salt://{{ project_name }}/{{ project_name }}_requirements.txt
     - require:
