@@ -3,13 +3,14 @@
 {% set project_user = pillar.get('project_user', 'alexrhino')  %}
 {% set app_name = pillar.get('app_name', 'test')  %}
 
+WSGIPythonHome /home/{{ project_user }}/venvs/{{ project_name }}
+WSGIPythonPath /var/www/{{ project_name }}
+
 <VirtualHost *:80>
     DocumentRoot "/var/www/{{ project_name }}"
     ServerName {{ project_domain_name }}
-    WSGIScriptAlias / /var/www/{{ project_name }}/{{ app_name }}/wsgi.py
-    WSGIPythonHome /home/{{ project_user }}/venvs/{{ project_name }}
-    WSGIPythonPath /var/www/{{ project_name }}
-    WSGIProcessGroup %{GLOBAL}
+    WSGIScriptAlias / /var/www/{{ project_name }}/{{ project_name }}/wsgi.py
+#    WSGIProcessGroup %{GLOBAL}
     WSGIApplicationGroup %{GLOBAL}
     
     Alias /static/ /var/www/{{ project_name }}/static/
@@ -25,6 +26,6 @@
         AuthName "Top Secret"
         Require valid-user
         AuthBasicProvider wsgi
-        WSGIAuthUserScript /var/www/{{ project_name }}/{{ app_name }}/wsgi.py
+        WSGIAuthUserScript /var/www/{{ project_name }}/{{ project_name }}/wsgi.py
     </Directory>
 </VirtualHost>

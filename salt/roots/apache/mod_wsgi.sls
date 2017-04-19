@@ -9,6 +9,7 @@ mod_wsgi:
     - require:
       - pkg: apache
 
+{% if grains.get('os_family') == 'RedHat' %}
 {% if apache.conf_mod_wsgi %}
 {{ apache.conf_mod_wsgi }}:
   file.uncomment:
@@ -17,3 +18,5 @@ mod_wsgi:
     - require:
       - pkg: mod_wsgi
 {% endif %}
+{% endif %}
+
