@@ -13,3 +13,4 @@ base:
     - git
   'jenkins.a.r':
     - jenkins
+    - postfix
