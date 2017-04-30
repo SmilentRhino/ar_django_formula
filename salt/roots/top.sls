@@ -1,16 +1,17 @@
 base:
   '*':
 #    - salt
+    - apt
     - consul
     - users
-  'dev.a.r':
+  'dev':
     - django
     - consul_pillar
-    - apache
-    - apache.mod_wsgi
-    - mod_wsgi
-    - apache.vhosts.standard
+#    - apache
+#    - apache.mod_wsgi
+#    - mod_wsgi
+#    - apache.vhosts.standard
     - git
-  'jenkins.a.r':
+  'jenkins':
     - jenkins
     - postfix

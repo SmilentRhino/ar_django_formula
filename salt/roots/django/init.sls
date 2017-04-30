@@ -1,4 +1,5 @@
-{% set project_name = pillar.get('project_name', 'django_project')  %}
+{% set project_name = pillar.get('project_name', '')  %}
+{% set project_user = pillar.get('project_user', '')  %}
 
 python.packages:
   pkg.installed:
@@ -15,8 +16,10 @@ virtualenv:
     - require:
       - pkg: python.packages
 
-/usr/local/venvs/{{ project_name }}:
+{% if project_name %}
+/home/{{ project_user }}/{{ project_name }}_env:
   virtualenv.managed:
     - python: /usr/bin/python3
     - system_site_packages: False
-    - requirements: /var/www/{{ project_name }}/requirements.txt
+    - user: {{ project_user }}
+{% endif %}
